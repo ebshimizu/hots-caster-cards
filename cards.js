@@ -1,5 +1,5 @@
 const download = require('download-git-repo');
-const fs = require('fs');
+const fs = require('fs-extra');
 const path = require('path');
 const heroesTalentsRepo = 'github:heroespatchnotes/heroes-talents';
 const localDir = process.cwd();
@@ -9,7 +9,7 @@ const talentFile = path.join(localDir, 'talents.txt')
 const argv = require('yargs-parser')(process.argv.slice(2));
 
 // the anki media folder looks like C:\Users\falindrith\AppData\Roaming\Anki2\User 1\collection.media. Needs to be a command line arg
-const ankiMediaFolder = argv.media-folder;
+const ankiMediaFolder = argv.imagedir;
 
 // download the heroes-talents repo to local
 if (!(argv.download === false)) {
@@ -49,6 +49,10 @@ function exportHeroCards() {
     console.log(`Processing hero talents`);
     processHeroTalents(heroFiles[0], heroFiles.slice(1), talentCardFile, () => {
       console.log('Export Complete!');
+
+      if (ankiMediaFolder) {
+        exportImagesTo(ankiMediaFolder);
+      }
     })
   });
 }
@@ -106,4 +110,10 @@ function processHeroTalents(dataFile, remaining, outFile, complete) {
   }
 
   outFile.write(cards, () => { processHeroTalents(remaining.pop(), remaining, outFile, complete) });
+}
+
+function exportImagesTo(mediaFolder) {
+  console.log(`Copying images to ${mediaFolder}`);
+  fs.copySync(path.join(localDir, 'heroes-talents', 'images', 'talents'), mediaFolder);
+  console.log("Copy complete");
 }
