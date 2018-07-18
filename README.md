@@ -6,6 +6,7 @@ A script that exports ability and talent flashcards to [Anki2](https://apps.anki
 Requires: Node
 
 ```
+clone repository
 > yarn install
 > node cards.js
 ```
