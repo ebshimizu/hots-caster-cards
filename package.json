@@ -1,0 +1,13 @@
+{
+  "name": "hots-caster-cards",
+  "version": "2.2.0",
+  "description": "An Anki flash card deck export script for reviewing Heroes of the Storm talent and ability names.",
+  "bugs": "falindrith@gmail.com",
+  "author": "Falindrith",
+  "license": "MIT",
+  "files": [
+    "cards.js"
+  ],
+  "dependencies": {
+  }
+}
