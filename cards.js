@@ -71,6 +71,10 @@ function processHeroAbilities(dataFile, remaining, outFile, complete) {
 
   // abilities
   var cards = "";
+
+  if (heroData.name === "L\u00facio")
+    heroData.name = "Lucio";
+
   for (let ability of heroData.abilities[heroData.name]) {
     const cost = ability.manaCost ? ability.manaCost : 'None';
     const cooldown = ability.cooldown ? ability.cooldown : 'None';
